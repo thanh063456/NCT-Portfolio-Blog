@@ -1,21 +1,10 @@
-import { NextResponse, type NextRequest } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { type NextRequest, NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
-  const response = NextResponse.next({ request });
-
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      auth: {
-        persistSession: false,
-      },
-    }
-  );
-
+export function middleware(request: NextRequest) {
+  // Check if user is authenticated by looking for Supabase access token
   const token = request.cookies.get("sb-access-token")?.value;
 
+  // Protect /dashboard routes
   if (request.nextUrl.pathname.startsWith("/dashboard")) {
     if (!token) {
       const loginUrl = new URL("/login", request.url);
@@ -24,7 +13,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
