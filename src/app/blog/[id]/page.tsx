@@ -1,71 +1,42 @@
 import { notFound } from "next/navigation";
 
 import { LikeButton } from "@/components/like-button";
-import type { JsonPost, JsonUser } from "@/types";
+import { Badge } from "@/components/ui/badge";
+import { blogPosts } from "@/data/blog-posts";
 
 type BlogDetailProps = {
   params: Promise<{ id: string }>;
 };
 
-async function getPost(id: string): Promise<JsonPost | null> {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-    next: { revalidate: 3600 },
-  });
-
-  if (!response.ok) {
-    return null;
-  }
-
-  return response.json();
-}
-
-async function getUser(id: number): Promise<JsonUser | null> {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
-    next: { revalidate: 3600 },
-  });
-
-  if (!response.ok) {
-    return null;
-  }
-
-  return response.json();
-}
-
-async function getUsers(): Promise<JsonUser[]> {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users", {
-    next: { revalidate: 3600 },
-  });
-
-  if (!response.ok) {
-    return [];
-  }
-
-  return response.json();
-}
-
 export default async function BlogDetailPage({ params }: BlogDetailProps) {
   const { id } = await params;
 
-  const [resolvedPost, users] = await Promise.all([getPost(id), getUsers()]);
+  const resolvedPost = blogPosts.find((post) => post.id === id);
 
   if (!resolvedPost) {
     notFound();
   }
 
-  const user = users.find((item) => item.id === resolvedPost.userId) ?? (await getUser(resolvedPost.userId));
-
   return (
-    <article className="mx-auto max-w-3xl space-y-6">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">{resolvedPost.title}</h1>
-        {user ? (
-          <p className="text-sm text-muted-foreground">
-            Tác giả: {user.name} ({user.email})
-          </p>
-        ) : null}
+    <article className="mx-auto max-w-4xl space-y-7 animate-slide-up-soft">
+      <header className="space-y-4 rounded-3xl border border-border/80 bg-card/90 p-6 sm:p-8">
+        <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+          <Badge variant="secondary">{resolvedPost.category}</Badge>
+          <span>{new Date(resolvedPost.publishedAt).toLocaleDateString("vi-VN")}</span>
+          <span>•</span>
+          <span>{resolvedPost.readMinutes} phút đọc</span>
+        </div>
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{resolvedPost.title}</h1>
+        <p className="max-w-3xl text-muted-foreground">{resolvedPost.excerpt}</p>
       </header>
 
-      <p className="whitespace-pre-line text-base leading-7 text-foreground/90">{resolvedPost.body}</p>
+      <div className="space-y-5 leading-8">
+        {resolvedPost.content.split("\n\n").map((paragraph, index) => (
+          <p key={index} className="text-base text-foreground/90">
+            {paragraph}
+          </p>
+        ))}
+      </div>
 
       <LikeButton />
     </article>
