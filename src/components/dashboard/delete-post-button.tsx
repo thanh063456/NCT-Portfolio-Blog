@@ -13,7 +13,7 @@ export function DeletePostButton({ id }: { id: string }) {
       variant="outline"
       disabled={pending}
       onClick={() => {
-        if (!window.confirm("Ban co chac chan muon xoa bai viet nay?")) {
+        if (!window.confirm("Bạn có chắc chắn muốn xóa bài viết này?")) {
           return;
         }
 
@@ -22,7 +22,7 @@ export function DeletePostButton({ id }: { id: string }) {
         });
       }}
     >
-      {pending ? "Dang xoa..." : "Xoa"}
+      {pending ? "Đang xóa..." : "Xóa"}
     </Button>
   );
 }

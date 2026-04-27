@@ -42,28 +42,28 @@ export default function GuestbookPage() {
 
   return (
     <section className="mx-auto max-w-3xl space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Guestbook</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Sổ lưu bút</h1>
 
-      <form action={action} className="space-y-4 rounded-xl border bg-card p-5">
+      <form action={action} className="space-y-4 rounded-2xl border bg-card/95 p-5 shadow-sm">
         <div className="space-y-2">
-          <Label htmlFor="name">Ten</Label>
-          <Input id="name" name="name" placeholder="Nguoi ghi" />
+          <Label htmlFor="name">Tên</Label>
+          <Input id="name" name="name" placeholder="Người ghi" />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="message">Loi nhan</Label>
-          <Textarea id="message" name="message" rows={4} placeholder="Hay de lai loi nhan..." />
+          <Label htmlFor="message">Lời nhắn</Label>
+          <Textarea id="message" name="message" rows={4} placeholder="Hãy để lại lời nhắn..." />
         </div>
         {state.error ? <p className="text-sm text-destructive">{state.error}</p> : null}
         {state.success ? <p className="text-sm text-emerald-600">{state.success}</p> : null}
         <Button type="submit" disabled={pending}>
-          {pending ? "Dang gui..." : "Them loi nhan"}
+          {pending ? "Đang gửi..." : "Thêm lời nhắn"}
         </Button>
       </form>
 
       <div className="space-y-3">
-        {loading ? <p className="text-sm text-muted-foreground">Dang tai du lieu...</p> : null}
+        {loading ? <p className="text-sm text-muted-foreground">Đang tải dữ liệu...</p> : null}
         {entries.map((entry) => (
-          <Card key={entry.id}>
+          <Card key={entry.id} className="border-border/80">
             <CardContent className="space-y-2 py-4">
               <div className="flex items-center justify-between gap-3">
                 <strong>{entry.name}</strong>
@@ -72,7 +72,7 @@ export default function GuestbookPage() {
                   className="text-sm text-destructive hover:underline"
                   onClick={() => deleteEntry(entry.id)}
                 >
-                  Xoa
+                  Xóa
                 </button>
               </div>
               <p className="text-sm text-muted-foreground">{entry.message}</p>

@@ -22,18 +22,18 @@ export default async function BlogPage() {
 
   return (
     <section className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Blog JSONPlaceholder</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Blog thực hành với JSONPlaceholder</h1>
       <div className="grid gap-4 sm:grid-cols-2">
         {posts.map((post) => (
-          <Card key={post.id}>
+          <Card key={post.id} className="transition duration-200 hover:-translate-y-1 hover:shadow-lg">
             <CardHeader>
               <CardTitle className="line-clamp-2">{post.title}</CardTitle>
-              <CardDescription>Post #{post.id}</CardDescription>
+              <CardDescription>Bài viết #{post.id}</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="mb-3 line-clamp-3 text-sm text-muted-foreground">{post.body}</p>
               <Link href={`/blog/${post.id}`} className="text-sm text-primary hover:underline">
-                Doc chi tiet
+                Đọc chi tiết
               </Link>
             </CardContent>
           </Card>

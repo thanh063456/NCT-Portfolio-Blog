@@ -6,8 +6,8 @@ import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 
 const guestbookSchema = z.object({
-  name: z.string().min(2, "Ten phai tu 2 ky tu"),
-  message: z.string().min(5, "Loi nhan phai tu 5 ky tu"),
+  name: z.string().min(2, "Tên phải từ 2 ký tự"),
+  message: z.string().min(5, "Lời nhắn phải từ 5 ký tự"),
 });
 
 export type GuestbookState = {
@@ -25,7 +25,7 @@ export async function addEntryAction(
   });
 
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Du lieu khong hop le" };
+    return { error: parsed.error.issues[0]?.message ?? "Dữ liệu không hợp lệ" };
   }
 
   const supabase = await createClient();
@@ -36,5 +36,5 @@ export async function addEntryAction(
   }
 
   revalidatePath("/guestbook");
-  return { success: "Da them loi nhan" };
+  return { success: "Đã thêm lời nhắn" };
 }

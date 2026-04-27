@@ -20,7 +20,7 @@ export default async function EditPostPage({ params }: EditPageProps) {
 
   return (
     <section className="mx-auto max-w-3xl space-y-4">
-      <h1 className="text-3xl font-bold tracking-tight">Chinh sua bai viet</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Chỉnh sửa bài viết</h1>
       <PostForm initialData={post} />
     </section>
   );

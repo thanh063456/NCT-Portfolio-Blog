@@ -39,14 +39,14 @@ export default async function PostDetailPage({ params }: PostPageProps) {
     <article className="mx-auto max-w-3xl space-y-8">
       <header className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">{post.title}</h1>
-        <p className="text-sm text-muted-foreground">Tac gia: {post.profiles?.display_name ?? "Unknown"}</p>
+        <p className="text-sm text-muted-foreground">Tác giả: {post.profiles?.display_name ?? "Ẩn danh"}</p>
       </header>
 
       <p className="whitespace-pre-line leading-7 text-foreground/90">{post.content}</p>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold">Binh luan</h2>
-        {user ? <CommentForm postId={post.id} /> : <p className="text-sm text-muted-foreground">Dang nhap de binh luan.</p>}
+        <h2 className="text-xl font-semibold">Bình luận</h2>
+        {user ? <CommentForm postId={post.id} /> : <p className="text-sm text-muted-foreground">Đăng nhập để bình luận.</p>}
         <CommentList comments={comments ?? []} />
       </section>
     </article>

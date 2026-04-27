@@ -15,11 +15,11 @@ export default function ContactPage() {
 
   return (
     <section className="mx-auto max-w-2xl space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Lien he</h1>
-      <form action={action} className="space-y-4 rounded-xl border bg-card p-5">
+      <h1 className="text-3xl font-bold tracking-tight">Liên hệ</h1>
+      <form action={action} className="space-y-4 rounded-2xl border bg-card/95 p-5 shadow-sm">
         <div className="space-y-2">
-          <Label htmlFor="name">Ho ten</Label>
-          <Input id="name" name="name" placeholder="Nhap ho ten" />
+          <Label htmlFor="name">Họ tên</Label>
+          <Input id="name" name="name" placeholder="Nhập họ tên" />
           {state.errors?.name ? <p className="text-sm text-destructive">{state.errors.name}</p> : null}
         </div>
 
@@ -30,15 +30,15 @@ export default function ContactPage() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="message">Noi dung</Label>
-          <Textarea id="message" name="message" rows={5} placeholder="Vui long de lai loi nhan" />
+          <Label htmlFor="message">Nội dung</Label>
+          <Textarea id="message" name="message" rows={5} placeholder="Vui lòng để lại lời nhắn" />
           {state.errors?.message ? <p className="text-sm text-destructive">{state.errors.message}</p> : null}
         </div>
 
         {state.success ? <p className="text-sm text-emerald-600">{state.success}</p> : null}
 
         <Button type="submit" disabled={pending}>
-          {pending ? "Dang gui..." : "Gui lien he"}
+          {pending ? "Đang gửi..." : "Gửi liên hệ"}
         </Button>
       </form>
     </section>

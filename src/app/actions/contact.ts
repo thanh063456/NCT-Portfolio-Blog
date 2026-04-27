@@ -3,9 +3,9 @@
 import { z } from "zod";
 
 const contactSchema = z.object({
-  name: z.string().min(2, "Ten phai co it nhat 2 ky tu"),
-  email: z.email("Email khong hop le"),
-  message: z.string().min(10, "Noi dung phai co it nhat 10 ky tu"),
+  name: z.string().min(2, "Tên phải có ít nhất 2 ký tự"),
+  email: z.email("Email không hợp lệ"),
+  message: z.string().min(10, "Nội dung phải có ít nhất 10 ký tự"),
 });
 
 export type ContactFormState = {
@@ -38,6 +38,6 @@ export async function sendContactAction(
   }
 
   return {
-    success: "Cam on ban! Minh da nhan duoc lien he.",
+    success: "Cảm ơn bạn! Mình đã nhận được liên hệ.",
   };
 }

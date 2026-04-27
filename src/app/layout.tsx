@@ -19,7 +19,7 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "NCT Portfolio Blog",
-  description: "Portfolio blog cua Ngo Cong Thanh - MSSV 2212461",
+  description: "Portfolio blog của Ngô Công Thành - MSSV 2212461",
 };
 
 export default function RootLayout({
@@ -29,10 +29,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className={`${sans.variable} ${mono.variable} h-full`}>
-      <body className="min-h-full bg-background text-foreground antialiased">
+      <body className="min-h-full bg-background text-foreground antialiased selection:bg-primary/20">
         <div className="relative flex min-h-screen flex-col">
           <Header />
-          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
+          <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
             {children}
           </main>
           <Footer />

@@ -7,9 +7,9 @@ import { createClient } from "@/lib/supabase/server";
 
 const postSchema = z.object({
   id: z.string().uuid().optional(),
-  title: z.string().min(3, "Tieu de phai tu 3 ky tu"),
+  title: z.string().min(3, "Tiêu đề phải từ 3 ký tự"),
   excerpt: z.string().optional(),
-  content: z.string().min(10, "Noi dung phai tu 10 ky tu"),
+  content: z.string().min(10, "Nội dung phải từ 10 ký tự"),
   status: z.enum(["draft", "published"]),
 });
 
@@ -37,7 +37,7 @@ export async function savePost(_prevState: PostState, formData: FormData): Promi
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return { error: "Ban chua dang nhap" };
+    return { error: "Bạn chưa đăng nhập" };
   }
 
   const payload = {
@@ -61,7 +61,7 @@ export async function savePost(_prevState: PostState, formData: FormData): Promi
   }
 
   revalidatePath("/dashboard");
-  return { success: "Da luu bai viet" };
+  return { success: "Đã lưu bài viết" };
 }
 
 export async function deletePost(id: string) {

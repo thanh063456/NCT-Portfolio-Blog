@@ -9,7 +9,7 @@ export function Counter() {
 
   return (
     <div className="mt-6 rounded-xl border bg-card p-4">
-      <p className="mb-3 text-sm text-muted-foreground">Demo BT2 - useState Counter</p>
+      <p className="mb-3 text-sm text-muted-foreground">Demo BT2 - Bộ đếm dùng useState</p>
       <div className="flex items-center gap-3">
         <Button variant="outline" onClick={() => setCount((prev) => prev - 1)}>
           -

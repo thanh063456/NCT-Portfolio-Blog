@@ -5,7 +5,7 @@ export function CommentList({ comments }: { comments: CommentWithAuthor[] }) {
   return (
     <div className="space-y-3">
       {comments.map((comment) => {
-        const name = comment.profiles?.display_name ?? "Anonymous";
+        const name = comment.profiles?.display_name ?? "Ẩn danh";
         const letter = name.charAt(0).toUpperCase();
 
         return (

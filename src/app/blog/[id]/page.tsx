@@ -60,7 +60,7 @@ export default async function BlogDetailPage({ params }: BlogDetailProps) {
         <h1 className="text-3xl font-bold tracking-tight">{resolvedPost.title}</h1>
         {user ? (
           <p className="text-sm text-muted-foreground">
-            Tac gia: {user.name} ({user.email})
+            Tác giả: {user.name} ({user.email})
           </p>
         ) : null}
       </header>

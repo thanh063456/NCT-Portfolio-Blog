@@ -29,15 +29,15 @@ export function CommentForm({ postId }: { postId: string }) {
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-3 rounded-xl border bg-card p-4">
+    <form onSubmit={onSubmit} className="space-y-3 rounded-2xl border bg-card/95 p-4 shadow-sm">
       <Textarea
         value={content}
         onChange={(event) => setContent(event.target.value)}
-        placeholder="Viet binh luan cua ban"
+        placeholder="Viết bình luận của bạn"
       />
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
       <Button type="submit" disabled={pending}>
-        {pending ? "Dang gui..." : "Gui binh luan"}
+        {pending ? "Đang gửi..." : "Gửi bình luận"}
       </Button>
     </form>
   );

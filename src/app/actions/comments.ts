@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 
 const commentSchema = z.object({
   postId: z.string().uuid(),
-  content: z.string().min(1, "Noi dung khong duoc de trong"),
+  content: z.string().min(1, "Nội dung không được để trống"),
 });
 
 export async function addComment(postId: string, content: string) {
@@ -22,7 +22,7 @@ export async function addComment(postId: string, content: string) {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return { error: "Vui long dang nhap de binh luan" };
+    return { error: "Vui lòng đăng nhập để bình luận" };
   }
 
   const { error } = await supabase.from("comments").insert({

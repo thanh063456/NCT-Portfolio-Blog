@@ -30,7 +30,7 @@ export async function signUp(_prevState: AuthState, formData: FormData): Promise
 
   if (!data.session) {
     return {
-      success: "Dang ky thanh cong. Vui long xac nhan email roi dang nhap.",
+      success: "Đăng ký thành công. Vui lòng xác nhận email rồi đăng nhập.",
     };
   }
 

@@ -12,12 +12,12 @@ import {
 import { createClient } from "@/lib/supabase/server";
 
 const navLinks = [
-  { href: "/", label: "Trang chu" },
-  { href: "/about", label: "About" },
+  { href: "/", label: "Trang chủ" },
+  { href: "/about", label: "Giới thiệu" },
   { href: "/blog", label: "Blog" },
-  { href: "/projects", label: "Projects" },
-  { href: "/guestbook", label: "Guestbook" },
-  { href: "/contact", label: "Contact" },
+  { href: "/projects", label: "Dự án" },
+  { href: "/guestbook", label: "Lưu bút" },
+  { href: "/contact", label: "Liên hệ" },
 ];
 
 export async function Header() {
@@ -26,19 +26,23 @@ export async function Header() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const displayName = user?.user_metadata?.display_name ?? user?.email ?? "N";
+  const displayName = user?.user_metadata?.display_name ?? user?.email ?? "Khách";
   const avatarLetter = String(displayName).charAt(0).toUpperCase();
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur-sm">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="text-lg font-bold tracking-tight text-primary">
-          NCT Blog
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/85 backdrop-blur-md">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <Link href="/" className="text-lg font-bold tracking-tight text-primary transition hover:opacity-90">
+          NCT Portfolio
         </Link>
 
-        <nav className="hidden items-center gap-5 text-sm md:flex">
+        <nav className="hidden items-center gap-2 rounded-full border border-border/70 bg-card/80 p-1 text-sm md:flex">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="transition hover:text-primary">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-full px-3 py-1.5 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            >
               {link.label}
             </Link>
           ))}
@@ -48,9 +52,9 @@ export async function Header() {
           {!user ? (
             <>
               <Button variant="outline" render={<Link href="/login" />}>
-                Login
+                Đăng nhập
               </Button>
-              <Button render={<Link href="/register" />}>Register</Button>
+              <Button render={<Link href="/register" />}>Đăng ký</Button>
             </>
           ) : (
             <DropdownMenu>
@@ -61,12 +65,12 @@ export async function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-44">
                 <DropdownMenuItem render={<Link href="/dashboard" />}>
-                  Dashboard
+                  Trang quản trị
                 </DropdownMenuItem>
                 <DropdownMenuItem variant="destructive">
                   <form action={signOut} className="w-full">
                     <button type="submit" className="w-full text-left">
-                      Dang xuat
+                      Đăng xuất
                     </button>
                   </form>
                 </DropdownMenuItem>
@@ -77,7 +81,7 @@ export async function Header() {
 
         <details className="relative md:hidden">
           <summary className="cursor-pointer list-none rounded-md border px-3 py-2 text-sm">
-            Menu
+            Danh mục
           </summary>
           <div className="absolute right-0 mt-2 w-56 rounded-lg border bg-card p-2 shadow-lg">
             {navLinks.map((link) => (
@@ -93,23 +97,23 @@ export async function Header() {
               {!user ? (
                 <div className="flex gap-2 px-2 pb-1">
                   <Button className="w-full" variant="outline" render={<Link href="/login" />}>
-                    Login
+                    Đăng nhập
                   </Button>
                   <Button className="w-full" render={<Link href="/register" />}>
-                    Register
+                    Đăng ký
                   </Button>
                 </div>
               ) : (
                 <div className="space-y-1 px-2 pb-1">
                   <Link href="/dashboard" className="block rounded-md px-3 py-2 text-sm hover:bg-muted">
-                    Dashboard
+                    Trang quản trị
                   </Link>
                   <form action={signOut}>
                     <button
                       type="submit"
                       className="w-full rounded-md px-3 py-2 text-left text-sm text-destructive hover:bg-muted"
                     >
-                      Dang xuat
+                      Đăng xuất
                     </button>
                   </form>
                 </div>

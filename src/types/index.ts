@@ -17,6 +17,6 @@ export interface Project {
   name: string;
   description: string;
   tech: string[];
-  status: "Hoan thanh" | "Dang lam" | "Y tuong";
+  status: "Hoàn thành" | "Đang làm" | "Ý tưởng";
   url: string;
 }

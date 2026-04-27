@@ -17,9 +17,9 @@ export function RegisterForm() {
   const isMismatch = confirmPassword.length > 0 && confirmPassword !== password;
 
   return (
-    <form action={action} className="space-y-4 rounded-xl border bg-card p-5">
+    <form action={action} className="space-y-4 rounded-2xl border bg-card/95 p-5 shadow-sm">
       <div className="space-y-2">
-        <Label htmlFor="display_name">Ho ten</Label>
+        <Label htmlFor="display_name">Họ tên</Label>
         <Input id="display_name" name="display_name" required />
       </div>
       <div className="space-y-2">
@@ -27,7 +27,7 @@ export function RegisterForm() {
         <Input id="email" name="email" type="email" required />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">Mật khẩu</Label>
         <Input
           id="password"
           name="password"
@@ -38,7 +38,7 @@ export function RegisterForm() {
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="confirmPassword">Xac nhan password</Label>
+        <Label htmlFor="confirmPassword">Xác nhận mật khẩu</Label>
         <Input
           id="confirmPassword"
           type="password"
@@ -47,11 +47,11 @@ export function RegisterForm() {
           onChange={(event) => setConfirmPassword(event.target.value)}
         />
       </div>
-      {isMismatch ? <p className="text-sm text-destructive">Mat khau xac nhan khong khop</p> : null}
+      {isMismatch ? <p className="text-sm text-destructive">Mật khẩu xác nhận không khớp</p> : null}
       {state.error ? <p className="text-sm text-destructive">{state.error}</p> : null}
       {state.success ? <p className="text-sm text-emerald-600">{state.success}</p> : null}
       <Button type="submit" className="w-full" disabled={pending || isMismatch}>
-        {pending ? "Dang tao tai khoan..." : "Dang ky"}
+        {pending ? "Đang tạo tài khoản..." : "Đăng ký"}
       </Button>
     </form>
   );
